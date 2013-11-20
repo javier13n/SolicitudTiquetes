@@ -115,3 +115,24 @@ function buscar(){
 	ajax.send("accion=buscarTodos");
 	//alert("accion=buscarTodos");//mostrar por un mensaje la información que se esta enviado por post
 }
+
+function eliminar(id){
+	if(confirm("Seguro que desea borrar el cliente?")){
+		
+		var ajax = objetoAjax();
+		
+		ajax.open("POST", "clienteService.php", true);
+		ajax.onreadystatechange=function() {
+				if (ajax.readyState==4) { //respondio el ajax
+					cadenafinal=ajax.responseText; //forma de obtener lo que responde el ajax	
+					//alert(cadenafinal);
+					mensaje.innerHTML = "<p id='msj' class='msg info'>Registro Eliminado</p>"; //injectar HTML en un DIV
+					limpiar();
+				}
+			}		
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+		ajax.send("accion=eliminar&id="+id);
+		
+	}
+	
+}

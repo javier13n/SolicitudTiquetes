@@ -63,6 +63,16 @@ include_once("domains/Cliente.php");
 		}catch (Exception $ex){
 			throw new Exception("Error buscando los clientes");
 		}
+	}
+	
+	public function eliminar(Cliente $cliente){
+		global $facturaAdodb;
+		try{
+			$sql = sprintf("delete from cliente where id=".$cliente);
+			$resultSql = $facturaAdodb->Execute($sql);
+		}catch(Exception $ex){
+			throw new Exception("Error al tratar de eliminar el cliente ".$ex );
+		}
 	}			
 		
  }

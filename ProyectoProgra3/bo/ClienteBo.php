@@ -41,6 +41,14 @@ class ClienteBo{
 			throw $ex;
 		}
 	}
+	
+	public function eliminar(Cliente $cliente){
+		try{
+			$this->clienteDao->eliminar($cliente);
+		}catch(Exception $ex){
+			throw $ex;
+		}
+	}
 }
 
 ?>

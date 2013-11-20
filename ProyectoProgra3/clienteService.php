@@ -32,6 +32,11 @@ if(isset($_POST['accion'])){
 			 $clienteBo->agregar($cliente);
 		}
 		
+		if($accion == "eliminar"){
+			 $cliente->setId($_POST['id']);
+			 $clienteBo->eliminar($cliente);
+		}
+		
 		if($accion == "buscarTodos"){
 			$resultado = $clienteBo->buscarTodos();
 			
@@ -59,13 +64,15 @@ if(isset($_POST['accion'])){
 						  <td>'.$resultado->Fields("telefono2").'</td>
 						  <td>'.$resultado->Fields("direccion").'</td>
 						  <td>'.$resultado->Fields("estado").'</td>
-						  <td class="alignCenter"><a>Modificar</a> - <a>Eliminar</a></td>
+						  <td class="alignCenter"><a onClick="eliminar('.$resultado->Fields("id").')">Modificar</a> - <a>Eliminar</a></td>
 						</tr>');  
 					$resultado->MoveNext();
 				}
 				echo('</table>');
 			}
 		}
+
+
 		
 	}catch(Exception $ex){
 		echo($ex);
