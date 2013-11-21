@@ -26,7 +26,7 @@ function objetoAjax(){
 function agregar(){
 
 	var mensaje = document.getElementById('mensaje');
-	var id = document.getElementById('id').value;
+	var cedula = document.getElementById('cedula').value;
 	
 	var nombre = document.getElementById('nombre').value;
 	var apellido1 = document.getElementById('apellido1').value;
@@ -38,7 +38,6 @@ function agregar(){
 	var direccion = document.getElementById('direccion').value;
 	var estado = "A";
 	
-	alert(document.getElementById('estado').checked);
 	if(document.getElementById('estado').checked){
 		estado = "A";
 	}else{
@@ -58,14 +57,14 @@ function agregar(){
 				}
 			}		
 		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-		ajax.send("accion=agregar&id="+id+"&nombre="+nombre+"&apellido1="+apellido1+"&apellido2="+apellido2+"&email="+email+"&edad="+edad+"&telefono1="+telefono1
+		ajax.send("accion=agregar&cedula="+cedula+"&nombre="+nombre+"&apellido1="+apellido1+"&apellido2="+apellido2+"&email="+email+"&edad="+edad+"&telefono1="+telefono1
 		+"&telefono2="+telefono2+"&direccion="+direccion+"&estado="+estado);
 	}
 }
 
 function validar(){
 	var mensaje = document.getElementById('mensaje');
-	var id = document.getElementById('id').value;
+	var cedula = document.getElementById('cedula').value;
 	var nombre = document.getElementById('nombre').value;
 	var apellido1 = document.getElementById('apellido1').value;
 	var apellido2 = document.getElementById('apellido2').value;
@@ -77,7 +76,7 @@ function validar(){
 	var estado = document.getElementById('estado').value;
 	
 	
-	if(id == "" || nombre == "" || apellido1 == "" || email == "" || telefono1 == "" || telefono2 == "" ||
+	if(cedula == "" || nombre == "" || apellido1 == "" || email == "" || telefono1 == "" || telefono2 == "" ||
 	direccion == ""){
 		mensaje.innerHTML = "<p id='msj' class='msg warning'>Debe ingresar los campos requeridos</p>";
 		return false;
@@ -86,7 +85,7 @@ function validar(){
 }
 
 function limpiar(){
-	document.getElementById('id').value = '';
+	document.getElementById('cedula').value = '';
 	document.getElementById('nombre').value = '';
 	document.getElementById('apellido1').value = '';
 	document.getElementById('apellido2').value = '';
@@ -116,7 +115,8 @@ function buscar(){
 	//alert("accion=buscarTodos");//mostrar por un mensaje la información que se esta enviado por post
 }
 
-function eliminar(id){
+function eliminar(cedula){
+	var mensaje = document.getElementById('mensajeConsultarCliente');
 	if(confirm("Seguro que desea borrar el cliente?")){
 		
 		var ajax = objetoAjax();
@@ -127,11 +127,11 @@ function eliminar(id){
 					cadenafinal=ajax.responseText; //forma de obtener lo que responde el ajax	
 					//alert(cadenafinal);
 					mensaje.innerHTML = "<p id='msj' class='msg info'>Registro Eliminado</p>"; //injectar HTML en un DIV
-					limpiar();
+					buscar();
 				}
 			}		
 		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-		ajax.send("accion=eliminar&id="+id);
+		ajax.send("accion=eliminar&cedula="+cedula);
 		
 	}
 	

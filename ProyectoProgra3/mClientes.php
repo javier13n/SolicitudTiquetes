@@ -108,7 +108,7 @@
 				<table class="nostyle">
 					<tr>
 						<td style="width:70px;">Cedula:</td>
-						<td><input id="id" type="text" size="40" name="txtId" class="input-text" /></td>
+						<td><input id="cedula" type="text" size="40" name="txtId" class="input-text" /></td>
 					</tr>
 					<tr>
 						<td style="width:70px;">Nombre:</td>

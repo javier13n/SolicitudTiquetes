@@ -110,7 +110,8 @@
 			<br/>
 			<div id="tblCliente">
 			</div>
-			
+			<div id="mensajeConsultarCliente">
+			</div>
 
 		
 		</div> <!-- /content -->

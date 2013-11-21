@@ -6,6 +6,7 @@
 	 */
 	class Cliente {
 		private $id;
+		private $cedula;
 		private $nombre;
 		private $apellido1;
 		private $apellido2;
@@ -24,6 +25,14 @@
 		
 		public function setId($id){
 			$this->id = $id;
+		}
+		
+		public function getCedula(){
+			return $this->cedula;	
+		}
+		
+		public function setCedula($cedula){
+			$this->cedula = $cedula;
 		}
 		
 		public function getNombre(){

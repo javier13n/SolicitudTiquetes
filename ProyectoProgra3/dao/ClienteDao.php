@@ -19,9 +19,9 @@ include_once("domains/Cliente.php");
 		global $facturaAdodb;
 		
 		try{
-			$sql = sprintf("insert into Cliente(id,nombre,apellido1, apellido2, email, edad, telefono1, " .
+			$sql = sprintf("insert into Cliente(cedula,nombre,apellido1, apellido2, email, edad, telefono1, " .
 			"telefono2, direccion, estado) values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)", 
-			$facturaAdodb->Param("id"), 
+			$facturaAdodb->Param("cedula"), 
 			$facturaAdodb->Param("nombre"), 
 			$facturaAdodb->Param("apellido1"), 
 			$facturaAdodb->Param("apellido2"), 
@@ -36,7 +36,7 @@ include_once("domains/Cliente.php");
 			
 			$valores = array();
 			
-			$valores["id"] = $cliente->getId();	
+			$valores["cedula"] = $cliente->getCedula();	
 			$valores["nombre"] = $cliente->getNombre();
 			$valores["apellido1"] = $cliente->getApellido1();
 			$valores["apellido2"] = $cliente->getApellido2();
@@ -47,7 +47,7 @@ include_once("domains/Cliente.php");
 			$valores["direccion"] = $cliente->getDireccion();
 			$valores["estado"] = $cliente->getEstado();
 				
-			
+			echo($sql);
 			$resulSQL = $facturaAdodb->Execute($sql,$valores) or die($facturaAdodb->ErrorMsg());	
 		}catch(Exception $ex){
 			throw new Exception("No se pudo agregar el cliente " .$ex);
@@ -68,8 +68,11 @@ include_once("domains/Cliente.php");
 	public function eliminar(Cliente $cliente){
 		global $facturaAdodb;
 		try{
-			$sql = sprintf("delete from cliente where id=".$cliente);
-			$resultSql = $facturaAdodb->Execute($sql);
+			$sql = sprintf("delete from cliente where cedula=%s",$facturaAdodb->Param("cedula"));
+			$sql = $facturaAdodb->Prepare($sql);
+			
+			$valores["cedula"] = $cliente->getCedula();
+			$resultSql = $facturaAdodb->Execute($sql,$valores) or die($facturaAdodb->ErrorMsg());
 		}catch(Exception $ex){
 			throw new Exception("Error al tratar de eliminar el cliente ".$ex );
 		}

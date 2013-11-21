@@ -19,7 +19,7 @@ if(isset($_POST['accion'])){
 		$cliente = new Cliente();
 		
 		if($accion == "agregar"){
-			 $cliente->setId($_POST['id']);
+			 $cliente->setCedula($_POST['cedula']);
 			 $cliente->setNombre($_POST['nombre']);
 			 $cliente->setApellido1($_POST['apellido1']);
 			 $cliente->setApellido2($_POST['apellido2']);
@@ -33,7 +33,7 @@ if(isset($_POST['accion'])){
 		}
 		
 		if($accion == "eliminar"){
-			 $cliente->setId($_POST['id']);
+			 $cliente->setCedula($_POST['cedula']);
 			 $clienteBo->eliminar($cliente);
 		}
 		
@@ -56,7 +56,7 @@ if(isset($_POST['accion'])){
 				while (!$resultado->EOF){ //ciclo para recorrer cada una de las filas que retorno la consulta
 					echo('
 						<tr class="bg">
-						  <td>'.$resultado->Fields("id").'</td>
+						  <td>'.$resultado->Fields("cedula").'</td>
 						  <td>'.$resultado->Fields("nombre").'</td>
 						  <td>'.$resultado->Fields("email").'</td>
 						  <td>'.$resultado->Fields("edad").'</td>
@@ -64,7 +64,7 @@ if(isset($_POST['accion'])){
 						  <td>'.$resultado->Fields("telefono2").'</td>
 						  <td>'.$resultado->Fields("direccion").'</td>
 						  <td>'.$resultado->Fields("estado").'</td>
-						  <td class="alignCenter"><a onClick="eliminar('.$resultado->Fields("id").')">Modificar</a> - <a>Eliminar</a></td>
+						  <td class="alignCenter"><a>Modificar</a>-<a onClick="eliminar('.$resultado->Fields("cedula").')">Eliminar</a></td>
 						</tr>');  
 					$resultado->MoveNext();
 				}
