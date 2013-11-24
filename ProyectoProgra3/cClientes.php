@@ -62,12 +62,12 @@
 		</ul>
 
 		<ul class="box">
-			<li id="menu-active"><a href="index.html"><span>Tickets</span></a></li> <!-- Active -->
-			<li><a href="#"><span>Departamentos</span></a></li>
-			<li><a href="cClientes.html"><span>Clientes</span></a></li>
-			<li><a href="cFuncionarios.html"><span>Funcionarios</span></a></li>
-			<li><a href="#"><span>Bitácora</span></a></li>
-			<li><a href="#"><span>Configuración</span></a></li>
+			<li id="menu-active"><a href="index.php"><span>Tickets</span></a></li> <!-- Active -->
+			<li><a href="cDepartamentos.php"><span>Departamentos</span></a></li>
+			<li><a href="cClientes.php"><span>Clientes</span></a></li>
+			<li><a href="cFuncionarios.php"><span>Funcionarios</span></a></li>
+			<li><a href="cBitacora.php"><span>Bitácora</span></a></li>
+			<li><a href="cConfiguracion.php"><span>Configuración</span></a></li>
 		</ul>
 
 	</div> <!-- /header -->
