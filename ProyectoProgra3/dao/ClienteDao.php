@@ -65,12 +65,35 @@ include_once("domains/Cliente.php");
 		}
 	}
 	
+	public function buscarPorCedula(Cliente $cliente){
+		global $facturaAdodb;
+		try{
+			$sql = sprintf("select * from cliente where cedula=%s",$facturaAdodb->Param("cedula"));
+			$sql = $facturaAdodb->Prepare($sql);
+			$valores = array();
+			$valores["cedula"] = $cliente->getCedula();
+			$resultSql = $facturaAdodb->Execute($sql,$valores) or die($facturaAdodb->ErrorMsg());
+			return $resultSql;
+		}catch (Exception $ex){
+			throw new Exception("Error buscando los clientes");
+		}
+	}
+	
+	public function existeCliente(Cliente $cliente){
+		try{
+			$resultSql = $this->buscarPorCedula($cliente);
+			return $resultSql->RecordCount();
+		}catch(Exception $ex){
+			throw $ex;
+		}
+	}
+	
 	public function eliminar(Cliente $cliente){
 		global $facturaAdodb;
 		try{
 			$sql = sprintf("delete from cliente where cedula=%s",$facturaAdodb->Param("cedula"));
 			$sql = $facturaAdodb->Prepare($sql);
-			
+			$valores = array();
 			$valores["cedula"] = $cliente->getCedula();
 			$resultSql = $facturaAdodb->Execute($sql,$valores) or die($facturaAdodb->ErrorMsg());
 		}catch(Exception $ex){

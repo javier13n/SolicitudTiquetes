@@ -53,9 +53,23 @@ if(isset($_POST['accion'])){
 						  <th>Estado</th>
 						  <th>Accion</th>
 						</tr>');
+				$i = 0;
 				while (!$resultado->EOF){ //ciclo para recorrer cada una de las filas que retorno la consulta
+					
+					if($i % 2 == 0){
+						echo('<tr class="bg">');
+					}else{
+						echo('<tr>');
+					}
+					
+					$estado = "";
+					if($resultado->Fields("estado") == "A"){
+						$estado = "Activo";
+					}else{
+						$estado = "Inactivo";
+					}
+
 					echo('
-						<tr class="bg">
 						  <td>'.$resultado->Fields("cedula").'</td>
 						  <td>'.$resultado->Fields("nombre").'</td>
 						  <td>'.$resultado->Fields("email").'</td>
@@ -63,10 +77,11 @@ if(isset($_POST['accion'])){
 						  <td>'.$resultado->Fields("telefono1").'</td>
 						  <td>'.$resultado->Fields("telefono2").'</td>
 						  <td>'.$resultado->Fields("direccion").'</td>
-						  <td>'.$resultado->Fields("estado").'</td>
+						  <td>'.$estado.'</td>
 						  <td class="alignCenter"><a>Modificar</a>-<a onClick="eliminar('.$resultado->Fields("cedula").')">Eliminar</a></td>
 						</tr>');  
 					$resultado->MoveNext();
+					$i = $i + 1;
 				}
 				echo('</table>');
 			}

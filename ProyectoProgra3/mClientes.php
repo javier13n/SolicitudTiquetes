@@ -84,7 +84,7 @@
 				<!-- Search -->
 			
 				<!-- Create a new project -->
-				<p id="btn-create" class="box"><a href="cClientes.html"><span>Regresar</span></a></p>
+				<p id="btn-create" class="box"><a href="cClientes.php"><span>Regresar</span></a></p>
 
 			</div> <!-- /padding -->
 

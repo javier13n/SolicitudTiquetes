@@ -28,7 +28,13 @@ class ClienteBo{
 
 	public function agregar(Cliente $cliente){
 		try{
+			//echo("Hola");
+		//	echo($this->clienteDao->existeCliente($cliente));
+			//if($this->clienteDao->existeCliente($cliente) > 0){
 			$this->clienteDao->agregar($cliente);
+		//	}else {
+			//	throw new Exception("El cliente ya se encuentra en el sistema");
+			//}
 		}catch(Exception $ex){
 			throw $ex;
 		}

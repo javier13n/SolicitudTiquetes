@@ -88,7 +88,7 @@
 				<!-- Search -->
 			
 				<!-- Create a new project -->
-				<p id="btn-create" class="box"><a href="mClientes.html"><span>Agregar</span></a></p>
+				<p id="btn-create" class="box"><a href="mClientes.php"><span>Agregar</span></a></p>
 
 			</div> <!-- /padding -->
 
