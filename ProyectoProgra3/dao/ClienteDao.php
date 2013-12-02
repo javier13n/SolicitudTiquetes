@@ -54,6 +54,51 @@ include_once("domains/Cliente.php");
 		}
 	}
 
+	public function modificar(Cliente $cliente){
+	
+		global $facturaAdodb;
+		
+		try{
+			$sql = sprintf("update Cliente " . 
+						   "set cedula=%s,nombre=%s,apellido1=%s, apellido2=%s, email=%s, edad=%s, telefono1=%s, " .
+						   "telefono2=%s, direccion=%s, estado=%s " .
+						   "where id=%s", 
+			$facturaAdodb->Param("cedula"), 
+			$facturaAdodb->Param("nombre"), 
+			$facturaAdodb->Param("apellido1"), 
+			$facturaAdodb->Param("apellido2"), 
+			$facturaAdodb->Param("email"), 
+			$facturaAdodb->Param("edad"), 
+			$facturaAdodb->Param("telefono1"), 
+			$facturaAdodb->Param("telefono2"), 
+			$facturaAdodb->Param("direccion"), 
+			$facturaAdodb->Param("estado"),
+			$facturaAdodb->Param("id")
+			);
+			
+			$sql = $facturaAdodb->Prepare($sql);
+			
+			$valores = array();
+			
+			$valores["cedula"] = $cliente->getCedula();	
+			$valores["nombre"] = $cliente->getNombre();
+			$valores["apellido1"] = $cliente->getApellido1();
+			$valores["apellido2"] = $cliente->getApellido2();
+			$valores["email"] = $cliente->getEmail();
+			$valores["edad"] = $cliente->getEdad();
+			$valores["telefono1"] = $cliente->getTelefono1();
+			$valores["telefono2"] = $cliente->getTelefono2();
+			$valores["direccion"] = $cliente->getDireccion();
+			$valores["estado"] = $cliente->getEstado();
+			$valores["id"] = $cliente->getId();
+				
+			
+			$resulSQL = $facturaAdodb->Execute($sql,$valores) or die($facturaAdodb->ErrorMsg());	
+		}catch(Exception $ex){
+			throw new Exception("No se pudo agregar el cliente " .$ex);
+		}
+	}
+
 	public function buscarTodos(){
 		global $facturaAdodb;
 		try{

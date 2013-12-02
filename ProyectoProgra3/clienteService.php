@@ -32,6 +32,22 @@ if(isset($_POST['accion'])){
 			 $clienteBo->agregar($cliente);
 		}
 		
+		if($accion == "modificar"){
+			 $cliente->setId($_POST['id']);
+			 $cliente->setCedula($_POST['cedula']);
+			 $cliente->setNombre($_POST['nombre']);
+			 $cliente->setApellido1($_POST['apellido1']);
+			 $cliente->setApellido2($_POST['apellido2']);
+			 $cliente->setEmail($_POST['email']);
+			 $cliente->setEdad($_POST['edad']);
+			 $cliente->setTelefono1($_POST['telefono1']);
+			 $cliente->setTelefono2($_POST['telefono2']);
+			 $cliente->setDireccion($_POST['direccion']);
+			 $cliente->setEstado($_POST['estado']);
+			 $clienteBo->modificar($cliente);
+						
+		}
+		
 		if($accion == "eliminar"){
 			 $cliente->setCedula($_POST['cedula']);
 			 $clienteBo->eliminar($cliente);
@@ -78,7 +94,8 @@ if(isset($_POST['accion'])){
 						  <td>'.$resultado->Fields("telefono2").'</td>
 						  <td>'.$resultado->Fields("direccion").'</td>
 						  <td>'.$estado.'</td>
-						  <td class="alignCenter"><a>Modificar</a>-<a onClick="eliminar('.$resultado->Fields("cedula").')">Eliminar</a></td>
+						  <td class="alignCenter"><a class="textDecoration"href="modificarCliente.php?cedula='.$resultado->Fields("cedula").'">Modificar</a>-
+						  <a onClick="eliminar('.$resultado->Fields("cedula").');">Eliminar</a></td>
 						</tr>');  
 					$resultado->MoveNext();
 					$i = $i + 1;

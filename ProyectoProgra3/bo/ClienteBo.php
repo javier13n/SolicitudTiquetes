@@ -48,9 +48,25 @@ class ClienteBo{
 		}
 	}
 	
+	public function buscarPorCedula($cliente){
+		try{
+			return $this->clienteDao->buscarPorCedula($cliente);
+		}catch(Exception $ex){
+			throw $ex;
+		}
+	}
+
 	public function eliminar(Cliente $cliente){
 		try{
 			$this->clienteDao->eliminar($cliente);
+		}catch(Exception $ex){
+			throw $ex;
+		}
+	}
+	
+	public function modificar(Cliente $cliente){
+		try{
+			$this->clienteDao->modificar($cliente);
 		}catch(Exception $ex){
 			throw $ex;
 		}

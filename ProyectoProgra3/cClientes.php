@@ -93,8 +93,7 @@
 			</div> <!-- /padding -->
 
 			<ul class="box">
-				<li><a href="#">Actividades</a></li>
-				<li><a href="#">Lorem ipsum</a></li>
+				
 			</ul>
 
 		</div> <!-- /aside -->

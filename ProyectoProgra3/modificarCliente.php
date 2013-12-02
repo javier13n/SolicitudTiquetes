@@ -1,3 +1,28 @@
+<?php
+
+	require_once("bo/ClienteBo.php");
+	require_once("domains/Cliente.php");
+	
+	$cedula = $_GET['cedula'];
+	$clienteBo = new ClienteBo();
+	$cliente = new Cliente();
+	
+	$cliente->setCedula($cedula);
+	$resultado = $clienteBo->buscarPorCedula($cliente);
+	
+	$id = $resultado->Fields("id");
+	$nombre = $resultado->Fields("nombre");
+	$apellido1 = $resultado->Fields("apellido1");
+	$apellido2 = $resultado->Fields("apellido2");
+	$email = $resultado->Fields("email");
+	$edad = $resultado->Fields("edad");
+	$telefono1 = $resultado->Fields("telefono1");
+	$telefono2 = $resultado->Fields("telefono2");
+	$direccion = $resultado->Fields("direccion");
+	$estado = $resultado->Fields("estado");
+	
+?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
@@ -18,9 +43,16 @@
 	<script type="text/javascript" src="js/ui.tabs.js"></script>
 	<script type="text/javascript" src="js/Cliente.js"></script>
 	<script type="text/javascript">
-	$(document).ready(function(){
-		$(".tabs > ul").tabs();
-	});
+		$(document).ready(function(){
+			$(".tabs > ul").tabs();
+		});
+		
+		$(function(){
+		   	alert("Hola");
+		   	var s = "<?php echo($estado) ?>";
+			alert(s);
+			
+		});
 	</script>
 	<title>Gestión de Tickets</title>
 </head>
@@ -90,7 +122,7 @@
 			</div> <!-- /padding -->
 
 			<ul class="box">
-				<li><a href="#">Actividades</a></li>
+				
 			</ul>
 
 		</div> <!-- /aside -->
@@ -100,65 +132,71 @@
 		<!-- Content (Right Column) -->
 		<div id="content" class="box">
 
-			<h1>Crear Clientes</h1>
+			<h1>Modificar Clientes</h1>
 			<!-- Table (TABLE) -->
-			<form onsubmit="agregar(); return false;" method="post"> 
+			<form onsubmit="modificar(); return false;" method="post"> 
  				<fieldset>
 				<legend>Cliente</legend>
 				<table class="nostyle">
 					<tr>
 						<td style="width:70px;">Cedula:</td>
-						<td><input id="cedula" type="text" size="40" name="txtId" class="input-text" /></td>
+						<td><input id="cedula" type="text" size="40" name="txtId" class="input-text" value="<?php echo($_GET['cedula']) ?>"/></td>
 					</tr>
 					<tr>
 						<td style="width:70px;">Nombre:</td>
-						<td><input id="nombre" type="text" size="40" name="txtNombre" class="input-text" /></td>
+						<td><input id="nombre" type="text" size="40" name="txtNombre" class="input-text" value ="<?php echo($nombre) ?>" /></td>
 					</tr>
 					<tr>
 						<td>Apellido 1:</td>
-						<td><input id="apellido1" type="text" size="40" name="txtApellido1" class="input-text" /></td>
+						<td><input id="apellido1" type="text" size="40" name="txtApellido1" class="input-text" value="<?php echo($apellido1) ?>"/></td>
 					</tr>
 					<tr>
 						<td class="va-top">Apellido 2:</td>
-						<td><input id="apellido2" type="text" size="40" name="txtApellido2" class="input-text" /></td>
+						<td><input id="apellido2" type="text" size="40" name="txtApellido2" class="input-text" value="<?php echo($apellido2) ?>" /></td>
 					</tr>
 					<tr>
 						<td class="va-top">Email:</td>
-						<td><input id="email" type="text" size="40" name="txtEmail" class="input-text" /></td>
+						<td><input id="email" type="text" size="40" name="txtEmail" class="input-text"  value="<?php echo($email) ?>"/></td>
 					</tr>
 					<tr>
 						<td class="va-top">Edad:</td>
 						<td>
 							<select id="edad" name="edad" id="edad" class="input-text width100px">
 								<script type="text/javascript">
+									var selectedValue = <?php echo($edad) ?>;
 									for(var i = 15; i<100; i++){
-										document.write("<option>"+parseInt(i)+"</option>");
+										if ( i != selectedValue){ 
+											document.write("<option>"+parseInt(i)+"</option>");
+										}else{
+											document.write("<option selected>"+parseInt(i)+"</option>");
+										}
 									}
-								</script>
+								</script> 	
 							</select>
 						</td>
 					</tr>
 					<tr>
 						<td class="va-top">Tel&eacute;fono 1:</td>
-						<td><input id="telefono1" type="text" size="40" name="txtTelefono1" class="input-text" /></td>
+						<td><input id="telefono1" type="text" size="40" name="txtTelefono1" class="input-text" value = "<?php echo($telefono1) ?>"/></td>
 					</tr>
 					<tr>
 						<td class="va-top">Tel&eacute;fono 2:</td>
-						<td><input id="telefono2" type="text" size="40" name="txtTelefono2" class="input-text" /></td>
+						<td><input id="telefono2" type="text" size="40" name="txtTelefono2" class="input-text" value="<?php echo($telefono2) ?>" /></td>
 					</tr>
 					<tr>
 						<td class="va-top">Direcci&oacute;n:</td>
-						<td><textarea id="direccion" cols="75" rows="7" name="txtDireccion" class="input-text"> </textarea></td>
+						<td><textarea id="direccion" cols="75" rows="7" name="txtDireccion" class="input-text"><?php echo($direccion) ?></textarea>
+						</td>
 					</tr>
 					<tr>
 						<td>Activo</td>
 						<td>
-							<label><input id="estado" type="checkbox" checked="checked" /></label> &nbsp;
+							<label><input id="estado" type="checkbox" /></label> &nbsp;
 						</td>
 					</tr>
-					
+					<input type="hidden" id="id" value="<?php echo($id) ?>"/>
 					<tr>
-						<td colspan="2" class="t-right"><input id="btn" type="submit" class="input-submit" value="Agregar" /></td>
+						<td colspan="2" class="t-right"><input id="btn" type="submit" class="input-submit" value="Modificar" /></td>
 					</tr>
 				</table>
 			</fieldset>
