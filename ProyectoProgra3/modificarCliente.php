@@ -48,9 +48,13 @@
 		});
 		
 		$(function(){
-		   	alert("Hola");
+		   	
 		   	var s = "<?php echo($estado) ?>";
-			alert(s);
+			if(s=="A"){
+				$("#estado").attr('checked', true);
+			}else{
+				$("#estado").attr('checked', false);
+			}
 			
 		});
 	</script>
