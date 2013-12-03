@@ -90,7 +90,7 @@
 			</div> <!-- /padding -->
 
 			<ul class="box">
-				<li><a href="#">Actividades</a></li>
+				
 			</ul>
 
 		</div> <!-- /aside -->

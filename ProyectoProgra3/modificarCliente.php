@@ -47,8 +47,7 @@
 			$(".tabs > ul").tabs();
 		});
 		
-		$(function(){
-		   	
+		$(function(){    	
 		   	var s = "<?php echo($estado) ?>";
 			if(s=="A"){
 				$("#estado").attr('checked', true);

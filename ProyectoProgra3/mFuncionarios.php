@@ -1,4 +1,13 @@
-<?xml version="1.0"?>
+<?php
+
+	require_once("bo/DepartamentoBo.php");
+	require_once("domains/Departamento.php");
+	
+	$departamentoBo = new DepartamentoBo();
+	$departamento = new Departamento();
+	$resultado = $departamentoBo->buscarTodos();
+?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
@@ -18,9 +27,13 @@
 	<script type="text/javascript" src="js/ui.core.js"></script>
 	<script type="text/javascript" src="js/ui.tabs.js"></script>
 	<script type="text/javascript">
-	$(document).ready(function(){
-		$(".tabs > ul").tabs();
-	});
+	
+		$(document).ready(function(){
+			$(".tabs > ul").tabs();
+		});
+		
+		
+		
 	</script>
 	<title>Gestión de Tickets</title>
 </head>
@@ -146,10 +159,14 @@
 					<td class="va-top">Departamento:</td>
 					<td>
 						<select name="edad" id="edad" class="input-text width100px">
-							<option>Administracion</option>
-							<option>Logistica</option>
-							<option>Comercial</option>
-							<option>Informatica</option>
+							<?php 
+								if($resultado->RecordCount() > 0){
+									while (!$resultado->EOF){
+										echo("<option value='".$resultado->Fields("id")."'>".$resultado->Fields("nombre")."</option>");
+										$resultado->MoveNext();
+									}
+								}
+							 ?>
 						</select>
 					</td>
 				</tr>
