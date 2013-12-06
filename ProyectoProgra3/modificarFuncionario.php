@@ -1,4 +1,3 @@
-<?xml version="1.0"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
@@ -17,10 +16,16 @@
 	<script type="text/javascript" src="js/toggle.js"></script>
 	<script type="text/javascript" src="js/ui.core.js"></script>
 	<script type="text/javascript" src="js/ui.tabs.js"></script>
+	<script type="text/javascript" src="js/Funcionario.js"></script>
 	<script type="text/javascript">
 	$(document).ready(function(){
 		$(".tabs > ul").tabs();
 	});
+	
+	$(function(){
+		   cargarComboBox();
+	});
+	
 	</script>
 	<title>Gestión de Tickets</title>
 </head>
@@ -58,13 +63,14 @@
 		</ul>
 
 		<ul class="box">
-			<li id="menu-active"><a href="index.html"><span>Tickets</span></a></li> <!-- Active -->
-			<li><a href="#"><span>Departamentos</span></a></li>
-			<li><a href="cClientes.html"><span>Clientes</span></a></li>
-			<li><a href="cFuncionarios.html"><span>Funcionarios</span></a></li>
-			<li><a href="#"><span>Bitácora</span></a></li>
-			<li><a href="#"><span>Configuración</span></a></li>
+			<li id="menu-active"><a href="index.php"><span>Tickets</span></a></li> <!-- Active -->
+			<li><a href="cDepartamentos.php"><span>Departamentos</span></a></li>
+			<li><a href="cClientes.php"><span>Clientes</span></a></li>
+			<li><a href="cFuncionarios.php"><span>Funcionarios</span></a></li>
+			<li><a href="cBitacora.php"><span>Bitácora</span></a></li>
+			<li><a href="cConfiguracion.php"><span>Configuración</span></a></li>
 		</ul>
+		
 
 	</div> <!-- /header -->
 
@@ -84,13 +90,12 @@
 				<!-- Search -->
 			
 				<!-- Create a new project -->
-				<p id="btn-create" class="box"><a href="mFuncionarios.html"><span>Agregar</span></a></p>
+				<p id="btn-create" class="box"><a href="cFuncionarios.php"><span>Regresar</span></a></p>
 
 			</div> <!-- /padding -->
 
 			<ul class="box">
-				<li><a href="#">Actividades</a></li>
-				<li><a href="#">Lorem ipsum</a></li>
+				
 			</ul>
 
 		</div> <!-- /aside -->
@@ -100,56 +105,63 @@
 		<!-- Content (Right Column) -->
 		<div id="content" class="box">
 
-			<h1>Consulta Funcionarios</h1>
+			<h1>Crear Funcionarios</h1>
 			<!-- Table (TABLE) -->
-		
-			<br/>
-			<table>
-				<tr>
-				    <th>Lorem ipsum</th>
-				    <th>Lorem ipsum</th>
-				    <th>Lorem ipsum</th>
-				    <th>Lorem ipsum</th>
-				    <th>Lorem ipsum</th>
-				</tr>
-				<tr>
-				    <td>Lorem ipsum</td>
-				    <td>Lorem ipsum</td>
-				    <td>Lorem ipsum</td>
-				    <td>Lorem ipsum</td>
-				    <td>Lorem ipsum</td>
-				</tr>
-				<tr class="bg">
-				    <td>Lorem ipsum</td>
-				    <td>Lorem ipsum</td>
-				    <td>Lorem ipsum</td>
-				    <td>Lorem ipsum</td>
-				    <td>Lorem ipsum</td>
-				</tr>
-				<tr>
-				    <td>Lorem ipsum</td>
-				    <td>Lorem ipsum</td>
-				    <td>Lorem ipsum</td>
-				    <td>Lorem ipsum</td>
-				    <td>Lorem ipsum</td>
-				</tr>
-				<tr class="bg">
-				    <td>Lorem ipsum</td>
-				    <td>Lorem ipsum</td>
-				    <td>Lorem ipsum</td>
-				    <td>Lorem ipsum</td>
-				    <td>Lorem ipsum</td>
-				</tr>
-				<tr>
-				    <td>Lorem ipsum</td>
-				    <td>Lorem ipsum</td>
-				    <td>Lorem ipsum</td>
-				    <td>Lorem ipsum</td>
-				    <td>Lorem ipsum</td>
-				</tr>
-			</table>
-
-		
+			<form onsubmit="agregar(); return false;" method="post"> 
+ 				<fieldset>
+				<legend>Funcionario</legend>
+				<table class="nostyle">
+					<tr>
+						<td style="width:70px;">Nombre:</td>
+						<td><input id="nombre" type="text" size="40" name="txtNombre" class="input-text" /></td>
+					</tr>
+					<tr>
+						<td>Apellido 1:</td>
+						<td><input id="apellido1" type="text" size="40" name="txtApellido1" class="input-text" /></td>
+					</tr>
+					<tr>
+						<td class="va-top">Apellido 2:</td>
+						<td><input id="apellido2" type="text" size="40" name="txtApellido2" class="input-text" /></td>
+					</tr>
+					<tr>
+						<td class="va-top">Email:</td>
+						<td><input id="email" type="text" size="40" name="txtEmail" class="input-text" /></td>
+					</tr>
+					<tr>
+						<td class="va-top">Departamento:</td>
+						<td>
+							<div id="cmbDepartamento">
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="va-top">Login:</td>
+						<td><input id="login" type="text" size="40" class="input-text" /></td>
+					</tr>
+					<tr>
+						<td class="va-top">Contrase&ntilde;a:</td>
+						<td><input id="contrasenna" type="password" size="40"  class="input-text" /></td>
+					</tr>
+					<tr>
+						<td class="va-top">Confirmar:</td>
+						<td><input id="confirmar" type="password" size="40" class="input-text" /></td>
+					</tr>
+				
+					<tr>
+						<td>Activo</td>
+						<td>
+							<label><input id="estado" type="checkbox" checked="checked" /></label> &nbsp;
+						</td>
+					</tr>
+					
+					<tr>
+						<td colspan="2" class="t-right"><input id="btn" type="submit" class="input-submit" value="Agregar" /></td>
+					</tr>
+				</table>
+			</fieldset>
+		</form>
+		<div id="mensaje">
+		</div>
 		</div> <!-- /content -->
 
 	</div> <!-- /cols -->

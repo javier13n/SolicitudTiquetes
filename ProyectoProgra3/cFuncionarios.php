@@ -18,14 +18,14 @@
 	<script type="text/javascript" src="js/ui.tabs.js"></script>
 	<script type="text/javascript" src="js/Funcionario.js"></script>
 	<script type="text/javascript">
-	$(document).ready(function(){
-		$(".tabs > ul").tabs();
-	});
-	
-	$(function(){
-		   cargarComboBox();
-	});
-	
+		$(document).ready(function(){
+			$(".tabs > ul").tabs();
+		});
+		
+		$(function(){
+		   buscar();
+		});
+		
 	</script>
 	<title>Gestión de Tickets</title>
 </head>
@@ -70,7 +70,6 @@
 			<li><a href="cBitacora.php"><span>Bitácora</span></a></li>
 			<li><a href="cConfiguracion.php"><span>Configuración</span></a></li>
 		</ul>
-		
 
 	</div> <!-- /header -->
 
@@ -90,7 +89,7 @@
 				<!-- Search -->
 			
 				<!-- Create a new project -->
-				<p id="btn-create" class="box"><a href="cFuncionarios.php"><span>Regresar</span></a></p>
+				<p id="btn-create" class="box"><a href="mFuncionarios.php"><span>Agregar</span></a></p>
 
 			</div> <!-- /padding -->
 
@@ -105,63 +104,15 @@
 		<!-- Content (Right Column) -->
 		<div id="content" class="box">
 
-			<h1>Crear Funcionarios</h1>
+			<h1>Consulta Funcionarios</h1>
 			<!-- Table (TABLE) -->
-			<form onsubmit="agregar(); return false;" method="post"> 
- 				<fieldset>
-				<legend>Funcionario</legend>
-				<table class="nostyle">
-					<tr>
-						<td style="width:70px;">Nombre:</td>
-						<td><input id="nombre" type="text" size="40" name="txtNombre" class="input-text" /></td>
-					</tr>
-					<tr>
-						<td>Apellido 1:</td>
-						<td><input id="apellido1" type="text" size="40" name="txtApellido1" class="input-text" /></td>
-					</tr>
-					<tr>
-						<td class="va-top">Apellido 2:</td>
-						<td><input id="apellido2" type="text" size="40" name="txtApellido2" class="input-text" /></td>
-					</tr>
-					<tr>
-						<td class="va-top">Email:</td>
-						<td><input id="email" type="text" size="40" name="txtEmail" class="input-text" /></td>
-					</tr>
-					<tr>
-						<td class="va-top">Departamento:</td>
-						<td>
-							<div id="cmbDepartamento">
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<td class="va-top">Login:</td>
-						<td><input id="login" type="text" size="40" class="input-text" /></td>
-					</tr>
-					<tr>
-						<td class="va-top">Contrase&ntilde;a:</td>
-						<td><input id="contrasenna" type="password" size="40"  class="input-text" /></td>
-					</tr>
-					<tr>
-						<td class="va-top">Confirmar:</td>
-						<td><input id="confirmar" type="password" size="40" class="input-text" /></td>
-					</tr>
-				
-					<tr>
-						<td>Activo</td>
-						<td>
-							<label><input id="estado" type="checkbox" checked="checked" /></label> &nbsp;
-						</td>
-					</tr>
-					
-					<tr>
-						<td colspan="2" class="t-right"><input id="btn" type="submit" class="input-submit" value="Agregar" /></td>
-					</tr>
-				</table>
-			</fieldset>
-		</form>
-		<div id="mensaje">
-		</div>
+		
+			<br/>
+			<div id="tblFuncionario">
+			</div>
+			<div id="mensajeConsultarFuncionario">
+			</div>
+		
 		</div> <!-- /content -->
 
 	</div> <!-- /cols -->

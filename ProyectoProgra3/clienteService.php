@@ -84,10 +84,11 @@ if(isset($_POST['accion'])){
 					}else{
 						$estado = "Inactivo";
 					}
-
+					$nombre = $resultado->Fields("nombre") . " " . $resultado->Fields("apellido1") . " " . $resultado->Fields("apellido2");
+					
 					echo('
 						  <td>'.$resultado->Fields("cedula").'</td>
-						  <td>'.$resultado->Fields("nombre").'</td>
+						  <td>'.$nombre.'</td>
 						  <td>'.$resultado->Fields("email").'</td>
 						  <td>'.$resultado->Fields("edad").'</td>
 						  <td>'.$resultado->Fields("telefono1").'</td>

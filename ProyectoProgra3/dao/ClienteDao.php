@@ -95,7 +95,7 @@ include_once("domains/Cliente.php");
 			
 			$resulSQL = $facturaAdodb->Execute($sql,$valores) or die($facturaAdodb->ErrorMsg());	
 		}catch(Exception $ex){
-			throw new Exception("No se pudo agregar el cliente " .$ex);
+			throw new Exception("No se pudo actualizar el cliente " .$ex);
 		}
 	}
 
