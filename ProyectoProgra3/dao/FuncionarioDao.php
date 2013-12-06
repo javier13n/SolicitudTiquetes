@@ -48,7 +48,7 @@ class FuncionarioDao{
 		}
 	}
 
-	public function modificar(Funcionario $funcionario){
+	public function modificarContrasenna(Funcionario $funcionario){
 	
 		global $facturaAdodb;
 		
@@ -79,6 +79,45 @@ class FuncionarioDao{
 			$valores["email"] = $funcionario->getEmail();
 			$valores["login"] = $funcionario->getLogin();
 			$valores["contrasenna"] = $funcionario->getContrasenna();
+			$valores["estado"] = $funcionario->getEstado();
+			$valores["id"] = $funcionario->getId();
+				
+			
+			$resulSQL = $facturaAdodb->Execute($sql,$valores) or die($facturaAdodb->ErrorMsg());	
+		}catch(Exception $ex){
+			throw new Exception("No se pudo actualizar el funcionario " .$ex);
+		}
+	}
+
+	public function modificar(Funcionario $funcionario){
+	
+		global $facturaAdodb;
+		
+		try{
+			$sql = sprintf("update Funcionario " . 
+						   "set idDepartamento=%s,nombre=%s,apellido1=%s, apellido2=%s, email=%s, login=%s, " .
+						   "estado=%s " .
+						   "where id=%s", 
+			$facturaAdodb->Param("idDepartamento"), 
+			$facturaAdodb->Param("nombre"), 
+			$facturaAdodb->Param("apellido1"), 
+			$facturaAdodb->Param("apellido2"), 
+			$facturaAdodb->Param("email"), 
+			$facturaAdodb->Param("login"), 
+			$facturaAdodb->Param("estado"),
+			$facturaAdodb->Param("id")
+			);
+			
+			$sql = $facturaAdodb->Prepare($sql);
+			
+			$valores = array();
+			
+			$valores["idDepartamento"] = $funcionario->getIdDepartamento();	
+			$valores["nombre"] = $funcionario->getNombre();
+			$valores["apellido1"] = $funcionario->getApellido1();
+			$valores["apellido2"] = $funcionario->getApellido2();
+			$valores["email"] = $funcionario->getEmail();
+			$valores["login"] = $funcionario->getLogin();
 			$valores["estado"] = $funcionario->getEstado();
 			$valores["id"] = $funcionario->getId();
 				

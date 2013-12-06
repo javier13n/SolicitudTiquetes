@@ -1,3 +1,28 @@
+<?php
+	require_once("bo/FuncionarioBo.php");
+	require_once("domains/Funcionario.php");
+	
+	try{
+		$id = $_GET['id'];
+		$funcionarioBo = new FuncionarioBo();
+		$funcionario = new Funcionario();
+		
+		$funcionario->setId($id);
+		$resultado = $funcionarioBo->buscarPorId($funcionario);
+		
+		$id = $resultado->Fields("id");
+		$departamento = $resultado->Fields("idDepartamento");
+		$nombre = $resultado->Fields("nombre");
+		$apellido1 = $resultado->Fields("apellido1");
+		$apellido2 = $resultado->Fields("apellido2");
+		$email = $resultado->Fields("email");
+		$login = $resultado->Fields("login");
+		$estado = $resultado->Fields("estado");
+	}catch(Exception $ex){
+		echo($ex);
+	}
+?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
@@ -23,11 +48,20 @@
 	});
 	
 	$(function(){
-		   cargarComboBox();
+		   var d = "<?php echo($departamento) ?>";
+		   cargarComboBox(d);
+		   var s = "<?php echo($estado) ?>";
+		   
+			if(s=="A"){
+				$("#estado").attr('checked', true);
+			}else{
+				$("#estado").attr('checked', false);
+			}
+			$('select > option')[d-1].selected = true;
 	});
 	
 	</script>
-	<title>Gestión de Tickets</title>
+	<title>Gesti&oacute;n de Tickets</title>
 </head>
 
 <body>
@@ -45,7 +79,7 @@
 				<a href="#" rel="2col" class="styleswitch ico-col2" title="Display two columns"><img src="design/switcher-2col.gif" alt="2 Columns" /></a>
 			</span>
 
-			<strong>Gestión De Tickets</strong>
+			<strong>Gesti&oacute;n De Tickets</strong>
 
 		</p>
 
@@ -105,27 +139,27 @@
 		<!-- Content (Right Column) -->
 		<div id="content" class="box">
 
-			<h1>Crear Funcionarios</h1>
+			<h1>Modificar Funcionarios</h1>
 			<!-- Table (TABLE) -->
-			<form onsubmit="agregar(); return false;" method="post"> 
+			<form onsubmit="modificar(); return false;" method="post"> 
  				<fieldset>
 				<legend>Funcionario</legend>
 				<table class="nostyle">
 					<tr>
 						<td style="width:70px;">Nombre:</td>
-						<td><input id="nombre" type="text" size="40" name="txtNombre" class="input-text" /></td>
+						<td><input id="nombre" type="text" size="40" name="txtNombre" class="input-text" value="<?php echo($nombre) ?>"/></td>
 					</tr>
 					<tr>
 						<td>Apellido 1:</td>
-						<td><input id="apellido1" type="text" size="40" name="txtApellido1" class="input-text" /></td>
+						<td><input id="apellido1" type="text" size="40" name="txtApellido1" class="input-text" value="<?php echo($apellido1) ?>"/></td>
 					</tr>
 					<tr>
 						<td class="va-top">Apellido 2:</td>
-						<td><input id="apellido2" type="text" size="40" name="txtApellido2" class="input-text" /></td>
+						<td><input id="apellido2" type="text" size="40" name="txtApellido2" class="input-text" value="<?php echo($apellido2) ?>"/></td>
 					</tr>
 					<tr>
 						<td class="va-top">Email:</td>
-						<td><input id="email" type="text" size="40" name="txtEmail" class="input-text" /></td>
+						<td><input id="email" type="text" size="40" name="txtEmail" class="input-text" value="<?php echo($email) ?>" /></td>
 					</tr>
 					<tr>
 						<td class="va-top">Departamento:</td>
@@ -136,7 +170,7 @@
 					</tr>
 					<tr>
 						<td class="va-top">Login:</td>
-						<td><input id="login" type="text" size="40" class="input-text" /></td>
+						<td><input id="login" type="text" size="40" class="input-text" value="<?php echo($login) ?>"/></td>
 					</tr>
 					<tr>
 						<td class="va-top">Contrase&ntilde;a:</td>
@@ -153,10 +187,16 @@
 							<label><input id="estado" type="checkbox" checked="checked" /></label> &nbsp;
 						</td>
 					</tr>
-					
 					<tr>
-						<td colspan="2" class="t-right"><input id="btn" type="submit" class="input-submit" value="Agregar" /></td>
+						<td></td>
+						<td>
+							<label><input id="cambio" type="checkbox"/>Cambiar Contrase&ntilde;a</label> &nbsp;
+						</td>
 					</tr>
+					<tr>
+						<td colspan="2" class="t-right"><input id="btn" type="submit" class="input-submit" value="Modificar" /></td>
+					</tr>
+					<input id="id" type="hidden" value="<?php echo($id) ?>"/>
 				</table>
 			</fieldset>
 		</form>
